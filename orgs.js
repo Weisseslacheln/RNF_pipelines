@@ -1,5 +1,5 @@
 let org = {
-  "add aff": [
+  "add-aff": [
     {
       $lookup: {
         from: "6.scopus",
@@ -136,10 +136,10 @@ let org = {
       },
     },
     {
-      $merge: "orgs_",
+      $merge: "system_orgs",
     },
   ],
-  "add scopus_id": [
+  "add-scopus_id": [
     {
       $match: {
         aff: {
@@ -197,7 +197,7 @@ let org = {
       },
     },
     {
-      $merge: "orgs_",
+      $merge: "system_orgs",
     },
   ],
   cosine: [
@@ -318,10 +318,10 @@ let org = {
       },
     },
     {
-      $merge: "orgs_",
+      $merge: "system_orgs",
     },
   ],
-  "add eid": [
+  "add-eid": [
     {
       $match: {
         scopus_id: null,
@@ -501,49 +501,13 @@ let org = {
       },
     },
     {
-      $merge: "orgs_",
+      $merge: "system_orgs",
     },
   ],
-  "eid match": [
+  "add-_id_en": [
     {
       $match: {
-        $expr: {
-          $and: [
-            {
-              $gt: [
-                {
-                  $size: "$id",
-                },
-                1,
-              ],
-            },
-            {
-              $eq: [
-                {
-                  $size: "$cosine",
-                },
-                0,
-              ],
-            },
-          ],
-        },
-      },
-    },
-    {
-      $match: {
-        eid: {
-          $ne: [],
-        },
-      },
-    },
-    {
-      $count: "string",
-    },
-  ],
-  "add _id_en": [
-    {
-      $match: {
-        scopus_id: "",
+        scopus_id: null,
       },
     },
     {
@@ -601,7 +565,7 @@ let org = {
       },
     },
     {
-      $merge: "orgs_",
+      $merge: "system_orgs",
     },
   ],
 };
